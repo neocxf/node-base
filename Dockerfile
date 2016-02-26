@@ -5,8 +5,8 @@ RUN apt-get update && \
 	apt-get install -y curl && \
 	curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash - && \
 	apt-get install -y nodejs && \
-	rm -rf /var/lib/apt/lists/* && \
-	apt-get clean
+	npm install -g bower && \
+	rm -rf /var/lib/apt/lists/*
 
 RUN mkdir src/
 WORKDIR src/
@@ -14,5 +14,6 @@ WORKDIR src/
 CMD ["npm", "start"]
 
 ONBUILD COPY ./package.json ./
-ONBUILD RUN npm install
+ONBUILD RUN npm install && bower install
 ONBUILD COPY . .
+ONBUILD RUN bower install
