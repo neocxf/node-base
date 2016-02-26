@@ -14,6 +14,6 @@ WORKDIR src/
 CMD ["npm", "start"]
 
 ONBUILD COPY ./package.json ./
-ONBUILD RUN npm install && bower install
+ONBUILD RUN npm install
 ONBUILD COPY . .
 ONBUILD RUN bower install
